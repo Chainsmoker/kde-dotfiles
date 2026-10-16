@@ -33,26 +33,31 @@ Item {
         z: 0
     }
 
-    Pipewire.PipeWireSourceItem {
-        id: pipewireItem
+    Loader {
+        anchors.fill: parent
+        active: root.hasStream && root.active && root.visible
 
-        readonly property real fitted: root.sourceAspect > (root.width / Math.max(1, root.height)) ? root.width / root.sourceAspect : root.height
+        sourceComponent: Pipewire.PipeWireSourceItem {
+            id: pipewireItem
 
-        anchors.centerIn: parent
-        height: fitted
-        visible: root.hasStream
-        width: fitted * root.sourceAspect
-        z: 1
+            readonly property real fitted: root.sourceAspect > (root.width / Math.max(1, root.height)) ? root.width / root.sourceAspect : root.height
 
-        // objectSerial is the binding that works for an unprivileged client;
-        // nodeId is deprecated upstream and needs PipeWire registry access this
-        // shell does not have. Older KPipeWire only has the latter, so pick
-        // whichever the installed version actually exposes.
-        Component.onCompleted: {
-            if ("objectSerial" in this)
-                this.objectSerial = Qt.binding(() => stream.objectSerial);
-            else if ("nodeId" in this)
-                this.nodeId = Qt.binding(() => stream.nodeId);
+            anchors.centerIn: parent
+            height: fitted
+            visible: root.hasStream
+            width: fitted * root.sourceAspect
+            z: 1
+
+            // objectSerial is the binding that works for an unprivileged client;
+            // nodeId is deprecated upstream and needs PipeWire registry access this
+            // shell does not have. Older KPipeWire only has the latter, so pick
+            // whichever the installed version actually exposes.
+            Component.onCompleted: {
+                if ("objectSerial" in this)
+                    this.objectSerial = Qt.binding(() => stream.objectSerial);
+                else if ("nodeId" in this)
+                    this.nodeId = Qt.binding(() => stream.nodeId);
+            }
         }
     }
 }

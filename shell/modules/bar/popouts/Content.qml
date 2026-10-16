@@ -40,7 +40,7 @@ Item {
             id: content
 
             width: viewport.width
-            height: Math.max(viewport.height, implicitHeight)
+            height: currentPopout?.item ? Math.max(viewport.height, currentPopout.item.implicitHeight) : viewport.height
             implicitHeight: currentPopout?.item?.implicitHeight ?? 0
 
         Popout {
@@ -267,7 +267,7 @@ Item {
 
         Repeater {
             model: ScriptModel {
-                values: SystemTray.items.values.filter(i => i.hasMenu && i.status !== Status.Passive && !GlobalConfig.bar.tray.hiddenIcons.includes(i.id))
+                values: SystemTray.items.values.filter(i => i && i.id && i.hasMenu && i.status !== Status.Passive && !GlobalConfig.bar.tray.hiddenIcons.includes(i.id))
             }
 
             Popout {
@@ -275,7 +275,7 @@ Item {
 
                 required property SystemTrayItem modelData
 
-                name: `traymenu${root.trayItemsToIndices[modelData.id]}`
+                name: modelData?.id ? `traymenu${root.trayItemsToIndices[modelData.id] ?? ""}` : ""
                 previewKey: "trayMenu"
                 sourceComponent: trayMenuComp
 
@@ -295,7 +295,7 @@ Item {
 
                     TrayMenu {
                         popouts: root.popouts
-                        trayItem: trayMenu.modelData.menu // qmllint disable unresolved-type
+                        trayItem: trayMenu.modelData?.menu // qmllint disable unresolved-type
                     }
                 }
             }
@@ -310,6 +310,12 @@ Item {
         property string previewKey: name
         property real minScale: 0.1
         readonly property bool shouldBeActive: root.popouts.currentName === name
+        property bool hasBeenLoaded: false
+
+        onShouldBeActiveChanged: {
+            if (shouldBeActive)
+                hasBeenLoaded = true;
+        }
 
         readonly property real masterScale: !isNaN(GlobalConfig.bar.previewScale) ? GlobalConfig.bar.previewScale : 1.0
         readonly property real elementOffset: GlobalConfig.bar.perElementPreviewScale ? (!isNaN(GlobalConfig.bar.previewScales[previewKey]) ? GlobalConfig.bar.previewScales[previewKey] : 0.0) : 0.0
@@ -322,7 +328,8 @@ Item {
         anchors.centerIn: parent
 
         opacity: 0
-        active: false
+        active: popout.shouldBeActive || popout.hasBeenLoaded
+        visible: popout.shouldBeActive || popout.opacity > 0
 
         states: State {
             name: "active"
@@ -346,6 +353,7 @@ Item {
                     }
                     PropertyAction {
                         property: "active"
+                        value: popout.hasBeenLoaded
                     }
                 }
             },

@@ -64,7 +64,7 @@ export CAELESTIA_SHELL_CONFIG="$SHELL_CONFIG"
 export QS_NO_RELOAD_POPUP=1
 export QS_DROP_EXPENSIVE_FONTS=1
 export QS_DISABLE_CRASH_HANDLER=1
-export QSG_RENDER_LOOP=threaded
+export QSG_RENDER_LOOP=basic
 export QT_QUICK_FLICKABLE_WHEEL_DECELERATION=10000
 # Quickshell imports its Hyprland IPC module even on KDE for API compatibility.
 # Its missing-socket warning is expected when this KDE port has no Hyprland instance.

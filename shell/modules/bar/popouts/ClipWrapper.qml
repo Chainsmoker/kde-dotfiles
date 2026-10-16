@@ -44,6 +44,8 @@ Item {
     visible: width > 0 && height > 0
     clip: true
 
+    width: implicitWidth
+    height: implicitHeight
     implicitWidth: isHorizontal ? content.implicitWidth : content.implicitWidth * (1 - offsetScale)
     implicitHeight: isHorizontal ? content.implicitHeight * (1 - offsetScale) : content.implicitHeight
 

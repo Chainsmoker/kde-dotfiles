@@ -488,11 +488,11 @@ Item {
                                     radius: Tokens.rounding.medium
 
                                     WindowPreview {
-                                        active: root.opacity > 0
+                                        active: root.opacity > 0 && !!modelData?.address
                                             && (dragHandler.active || Math.abs(page.index - listView.currentIndex) <= 1)
-                                            && !(root.activeInfoClient && root.activeInfoClient.address === modelData.address)
-                                            && Visibilities.streamClaim !== modelData.address
-                                        address: modelData.address ?? ""
+                                            && !(root.activeInfoClient && root.activeInfoClient.address === modelData?.address)
+                                            && Visibilities.streamClaim !== modelData?.address
+                                        address: modelData?.address ?? ""
                                         width: {
                                             const wAspect = activeWin.windowAspect;
                                             const containerAspect = thumb.width / Math.max(1, thumb.height);

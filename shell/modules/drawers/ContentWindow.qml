@@ -17,6 +17,7 @@ import qs.modules.background
 import qs.modules.bar
 import qs.modules.overview as Overview
 import qs.modules.background.desktopicons
+import qs.modules.launcher.services
 
 StyledWindow {
     id: root
@@ -244,6 +245,8 @@ StyledWindow {
                 if (anyActive) {
                     parent._wasActive = true;
                 } else if (parent._wasActive && !anyActive) {
+                    if (Windows.isSwitching)
+                        return;
                     parent._wasActive = false;
                     focusGrabState.clear();
                     if (panels.popouts.isDetached) panels.popouts.close();
@@ -331,7 +334,7 @@ StyledWindow {
 
             sourceItem: scaledWallpaperContainer
             anchors.fill: parent
-            hideSource: false
+            hideSource: true
             visible: false
         }
         MultiEffect {

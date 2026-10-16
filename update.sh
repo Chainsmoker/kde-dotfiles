@@ -182,7 +182,7 @@ elif command -v systemd-run >/dev/null 2>&1; then
         --setenv=QS_NO_RELOAD_POPUP=1 \
         --setenv=QS_DROP_EXPENSIVE_FONTS=1 \
         --setenv=QS_DISABLE_CRASH_HANDLER=1 \
-        --setenv=QSG_RENDER_LOOP=threaded \
+        --setenv=QSG_RENDER_LOOP=basic \
         --setenv=QT_QUICK_FLICKABLE_WHEEL_DECELERATION=10000 \
         -- "$QUICKSHELL_PATH" -n -p "$HOME/.config/quickshell/caelestia/shell.qml" &
 else
@@ -191,7 +191,7 @@ else
     export QS_NO_RELOAD_POPUP=1
     export QS_DROP_EXPENSIVE_FONTS=1
     export QS_DISABLE_CRASH_HANDLER=1
-    export QSG_RENDER_LOOP=threaded
+    export QSG_RENDER_LOOP=basic
     export QT_QUICK_FLICKABLE_WHEEL_DECELERATION=10000
     stdbuf -oL -eL "$QUICKSHELL_PATH" -n -p "$HOME/.config/quickshell/caelestia/shell.qml" >/dev/null 2>&1 &
 fi

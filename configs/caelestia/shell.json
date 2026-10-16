@@ -1,0 +1,26 @@
+{
+    "appearance": {
+        "transparency": {
+            "enabled": false
+        },
+        "blur": false
+    },
+    "background": {
+        "wallpaperFillMode": 2
+    },
+    "overview": {
+        "hoverTopLeft": false
+    },
+    "tabSwitch": {
+        "previewOnDesktop": false
+    },
+    "bar": {
+        "livePreviews": false,
+        "dock": {
+            "pinnedApps": [
+                "brave-browser",
+                "foot"
+            ]
+        }
+    }
+}

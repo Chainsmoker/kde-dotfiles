@@ -20,14 +20,40 @@ const AppearanceConfig* resolveAppearance(ConfigRoot* config, bool complete, con
     return ConfigSingleton::instance()->appearance();
 }
 
+AnimTokens* globalAnimTokens() {
+    static AnimTokens* s_anim = []() {
+        auto* anim = new AnimTokens(TokensSingleton::instance());
+        anim->bindDurations(ConfigSingleton::instance()->appearance()->anim()->durations());
+        anim->bindCurves(TokensSingleton::instance()->appearance()->curves());
+        return anim;
+    }();
+    return s_anim;
+}
+
+FontTokens* fontTokensForScreen(const QString& screen) {
+    static QHash<QString, FontTokens*> s_cache;
+    auto it = s_cache.find(screen);
+    if (it != s_cache.end())
+        return *it;
+
+    auto* config = screen.isEmpty() ? nullptr : ConfigSingleton::instance()->forScreen(screen);
+    auto* tokensRoot = screen.isEmpty() ? nullptr : TokensSingleton::instance()->forScreen(screen);
+    auto* appearance = config ? config->appearance() : ConfigSingleton::instance()->appearance();
+    auto* tokens = tokensRoot ? tokensRoot->appearance() : TokensSingleton::instance()->appearance();
+
+    auto* fontTokens = new FontTokens(TokensSingleton::instance());
+    fontTokens->bindFont(appearance->font());
+    fontTokens->bindTokens(tokens);
+    s_cache.insert(screen, fontTokens);
+    return fontTokens;
+}
+
 } // namespace
 
 Tokens::Tokens(QObject* parent)
     : QQuickAttachedPropertyPropagator(parent)
-    , m_font(new FontTokens(this))
-    , m_anim(new AnimTokens(this)) {
-    bindAnim();
-    bindFont();
+    , m_font(fontTokensForScreen(QString()))
+    , m_anim(globalAnimTokens()) {
     initialize();
 }
 
@@ -55,7 +81,7 @@ void Tokens::inheritScreen(const QString& screen) {
         m_tokens = TokensSingleton::instance()->forScreen(m_screen);
     }
 
-    bindFont();
+    m_font = fontTokensForScreen(m_screen);
     propagateScreen();
     emit sourceChanged();
 }
@@ -77,17 +103,9 @@ void Tokens::attachedParentChange(
         inheritScreen(tokens->screen());
 }
 
-void Tokens::bindAnim() {
-    m_anim->bindDurations(ConfigSingleton::instance()->appearance()->anim()->durations());
-    m_anim->bindCurves(TokensSingleton::instance()->appearance()->curves());
-}
+void Tokens::bindAnim() {}
 
-void Tokens::bindFont() {
-    auto* appearance = m_config ? m_config->appearance() : ConfigSingleton::instance()->appearance();
-    auto* tokens = m_tokens ? m_tokens->appearance() : TokensSingleton::instance()->appearance();
-    m_font->bindFont(appearance->font());
-    m_font->bindTokens(tokens);
-}
+void Tokens::bindFont() {}
 
 #define TOKENS_ATTACHED_GETTER(Type, name)                                                                             \
     const Type* Tokens::name() const {                                                                                 \

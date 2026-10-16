@@ -97,6 +97,7 @@ private:
     QElapsedTimer m_elapsed;
     bool m_physicsActive = false;
     bool m_hasPrevPos = false;
+    bool m_animPending = false;
 
     float m_dm00 = 1.0f;
     float m_dm01 = 0.0f;

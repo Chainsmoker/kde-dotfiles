@@ -19,6 +19,8 @@ Singleton {
     property bool needsStop
     property bool needsPause
 
+    Component.onCompleted: probeRecording()
+
     function start(extraArgs = []): void {
         needsStart = true;
         startArgs = extraArgs;
@@ -95,7 +97,7 @@ Singleton {
     }
 
     Timer {
-        interval: root.probing ? 500 : 2500
+        interval: root.probing ? 500 : 15000
         repeat: true
         running: true
         onTriggered: {

@@ -104,9 +104,20 @@ Item {
         property: "WlrLayershell.keyboardFocus"
         value: WlrKeyboardFocus.OnDemand
     }
+
+    property bool keepAlive: false
+
+    Timer {
+        running: !root.keepAlive
+        interval: 2000
+
+        onTriggered: root.keepAlive = true
+    }
+
     Comp {
         id: content
 
+        keepLoaded: root.keepAlive
         shouldBeActive: root.hasCurrent && !root.detachedMode
         anchors.fill: parent
         sourceComponent: Content {
@@ -146,8 +157,10 @@ Item {
         id: comp
 
         property bool shouldBeActive
+        property bool keepLoaded: false
 
-        active: false
+        active: comp.shouldBeActive || comp.keepLoaded
+        visible: comp.shouldBeActive || comp.opacity > 0
         opacity: 0
         states: State {
             name: "active"
@@ -184,6 +197,7 @@ Item {
                     }
                     PropertyAction {
                         property: "active"
+                        value: comp.keepLoaded
                     }
                 }
             }

@@ -20,6 +20,6 @@ run.sh
 
 /shell/translations/caelestia_en.ts
 /shell/translations/caelestia_en.qm
-
 caelestia-kde-plugins/
 wallpaper-selector/
+/graphify-out/

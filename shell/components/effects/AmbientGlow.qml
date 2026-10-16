@@ -148,17 +148,22 @@ Item {
                 contrast: root.contrast
             }
 
-            Pipewire.PipeWireSourceItem {
-                anchors.fill: root.deform ? parent : undefined
-                anchors.centerIn: root.deform ? undefined : parent
-                width: root.deform ? parent.width : root.fitted * root.sourceAspect
-                height: root.deform ? parent.height : root.fitted
+            Loader {
+                anchors.fill: parent
+                active: root.hasLiveStream && root.active && root.visible
 
-                Component.onCompleted: {
-                    if ("objectSerial" in this)
-                        this.objectSerial = Qt.binding(() => stream.objectSerial);
-                    else if ("nodeId" in this)
-                        this.nodeId = Qt.binding(() => stream.nodeId);
+                sourceComponent: Pipewire.PipeWireSourceItem {
+                    anchors.fill: root.deform ? parent : undefined
+                    anchors.centerIn: root.deform ? undefined : parent
+                    width: root.deform ? parent.width : root.fitted * root.sourceAspect
+                    height: root.deform ? parent.height : root.fitted
+
+                    Component.onCompleted: {
+                        if ("objectSerial" in this)
+                            this.objectSerial = Qt.binding(() => stream.objectSerial);
+                        else if ("nodeId" in this)
+                            this.nodeId = Qt.binding(() => stream.nodeId);
+                    }
                 }
             }
         }

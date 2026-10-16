@@ -160,17 +160,55 @@ Item {
                         Layout.alignment: Qt.AlignTop
 
                         sourceComponent: modelData.component
+                        active: false
 
-                        Component.onCompleted: active = Qt.binding(() => {
-                            if (!root.visibilities.dashboard)
-                                return false;
-                            if (active) return true;
-                            if (index === view.currentIndex)
-                                return true;
+                        function updateActive(): void {
+                            if (!root.visibilities.dashboard) {
+                                active = false;
+                                return;
+                            }
+                            if (active)
+                                return;
+                            if (index === view.currentIndex) {
+                                active = true;
+                                return;
+                            }
                             const vx = Math.floor(view.visibleArea.xPosition * view.contentWidth);
                             const vex = Math.floor(vx + view.visibleArea.widthRatio * view.contentWidth);
-                            return (vx >= x && vx <= x + implicitWidth) || (vex >= x && vex <= x + implicitWidth);
-                        })
+                            active = vx < x + implicitWidth && vex > x;
+                        }
+
+                        Component.onCompleted: updateActive()
+                        onXChanged: updateActive()
+                        onImplicitWidthChanged: updateActive()
+
+                        Connections {
+                            target: root.visibilities
+
+                            function onDashboardChanged(): void {
+                                paneLoader.updateActive();
+                            }
+                        }
+                        Connections {
+                            target: view
+
+                            function onCurrentIndexChanged(): void {
+                                paneLoader.updateActive();
+                            }
+                            function onContentWidthChanged(): void {
+                                paneLoader.updateActive();
+                            }
+                        }
+                        Connections {
+                            target: view.visibleArea
+
+                            function onXPositionChanged(): void {
+                                paneLoader.updateActive();
+                            }
+                            function onWidthRatioChanged(): void {
+                                paneLoader.updateActive();
+                            }
+                        }
                     }
                 }
             }

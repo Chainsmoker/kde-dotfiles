@@ -57,7 +57,7 @@ Column {
         AnimatedImage {
             anchors.fill: parent
             sourceSize.width: width * ((QsWindow.window as QsWindow)?.devicePixelRatio ?? 1)
-            playing: visible
+            playing: root.visibilities.session && opacity > 0
             asynchronous: true
             speed: Config.general.sessionGifSpeed
             source: Paths.absolutePath(Config.paths.sessionGif)
@@ -72,7 +72,7 @@ Column {
         AnimatedImage {
             anchors.fill: parent
             sourceSize.width: width * ((QsWindow.window as QsWindow)?.devicePixelRatio ?? 1)
-            playing: visible
+            playing: root.visibilities.session && opacity > 0
             asynchronous: true
             speed: Config.general.sessionGifSpeed
             source: Paths.absolutePath("root:/assets/dino.gif")
@@ -80,28 +80,8 @@ Column {
             opacity: GlobalConfig.general.caelestiaMode ? 1 : 0
 
             Behavior on opacity { Anim { type: Anim.Standard } }
-            
-            layer.enabled: true
 
-            layer.effect: Colouriser {
-                colorizationColor: Colours.palette.m3onSurface
-                sourceColor: "white"
-            }
-        }
-
-        AnimatedImage {
-            anchors.fill: parent
-            sourceSize.width: width * ((QsWindow.window as QsWindow)?.devicePixelRatio ?? 1)
-            playing: visible
-            asynchronous: true
-            speed: Config.general.sessionGifSpeed
-            source: Paths.absolutePath("root:/assets/dino.gif")
-            fillMode: AnimatedImage.PreserveAspectFit
-            opacity: GlobalConfig.general.caelestiaMode ? 1 : 0
-
-            Behavior on opacity { Anim { type: Anim.Standard } }
-            
-            layer.enabled: true
+            layer.enabled: opacity > 0
 
             layer.effect: Colouriser {
                 colorizationColor: Colours.palette.m3onSurface

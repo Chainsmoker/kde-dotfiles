@@ -1,5 +1,6 @@
 #include "blobrect.hpp"
 
+#include <QTimer>
 #include <algorithm>
 #include <cmath>
 
@@ -16,6 +17,21 @@ BlobRect::~BlobRect() {
 void BlobRect::updatePolish() {
     BlobShape::updatePolish();
 
+    if (m_deformScale <= 0.000001) {
+        if (m_physicsActive) {
+            m_dm00 = 1.0f;
+            m_dm01 = 0.0f;
+            m_dm11 = 1.0f;
+            m_dmVel00 = m_dmVel01 = m_dmVel11 = 0.0f;
+            m_deformMatrix = QMatrix4x4();
+            m_physicsActive = false;
+            m_animPending = false;
+            emit rawDeformMatrixChanged();
+            updateCenteredDeformMatrix();
+        }
+        return;
+    }
+
     if (m_physicsActive) {
         float totalDelta = std::abs(m_dm00 - 1.0f) + std::abs(m_dm01) + std::abs(m_dm11 - 1.0f);
         float totalVel = std::abs(m_dmVel00) + std::abs(m_dmVel01) + std::abs(m_dmVel11);
@@ -29,19 +45,34 @@ void BlobRect::updatePolish() {
             emit rawDeformMatrixChanged();
             updateCenteredDeformMatrix();
             m_physicsActive = false;
-        } else {
-            QMetaObject::invokeMethod(
-                this,
-                [this]() {
-                    if (m_physicsActive && m_group)
-                        m_group->markDirty();
-                },
-                Qt::QueuedConnection);
+            m_animPending = false;
+        } else if (!m_animPending) {
+            m_animPending = true;
+            QTimer::singleShot(16, this, [this]() {
+                m_animPending = false;
+                if (m_physicsActive && m_group)
+                    m_group->markDirty();
+            });
         }
     }
 }
 
 void BlobRect::updatePhysics() {
+    if (m_deformScale <= 0.000001) {
+        if (m_physicsActive) {
+            m_dm00 = 1.0f;
+            m_dm01 = 0.0f;
+            m_dm11 = 1.0f;
+            m_dmVel00 = m_dmVel01 = m_dmVel11 = 0.0f;
+            m_deformMatrix = QMatrix4x4();
+            m_physicsActive = false;
+            m_animPending = false;
+            emit rawDeformMatrixChanged();
+            updateCenteredDeformMatrix();
+        }
+        return;
+    }
+
     const QPointF scenePos = mapToScene(QPointF(width() / 2.0, height() / 2.0));
 
     if (!m_hasPrevPos) {
@@ -51,7 +82,12 @@ void BlobRect::updatePhysics() {
         return;
     }
 
-    const float dt = static_cast<float>(m_elapsed.restart()) / 1000.0f;
+    const qint64 elapsedMs = m_elapsed.elapsed();
+    if (elapsedMs < 1) {
+        return;
+    }
+    m_elapsed.restart();
+    const float dt = static_cast<float>(elapsedMs) / 1000.0f;
 
     const float dx = static_cast<float>(scenePos.x() - m_prevScenePos.x());
     const float dy = static_cast<float>(scenePos.y() - m_prevScenePos.y());
@@ -63,12 +99,13 @@ void BlobRect::updatePhysics() {
         m_dmVel00 = m_dmVel01 = m_dmVel11 = 0.0f;
         m_deformMatrix = QMatrix4x4();
         m_physicsActive = false;
+        m_animPending = false;
         emit rawDeformMatrixChanged();
         updateCenteredDeformMatrix();
         return;
     }
 
-    if (dt > 0.1f || dt < 0.001f) {
+    if (dt > 0.1f) {
         m_prevScenePos = scenePos;
         if (m_physicsActive)
             checkAtRest(0.0f);
@@ -309,5 +346,6 @@ void BlobRect::checkAtRest(float speed) {
         emit rawDeformMatrixChanged();
         updateCenteredDeformMatrix();
         m_physicsActive = false;
+        m_animPending = false;
     }
 }
