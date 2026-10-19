@@ -41,6 +41,7 @@ PageBase {
         "perfBattery": { icon: "battery_full", name: qsTr("Battery"), available: UPower.displayDevice.isLaptopBattery, unavailableText: qsTr("Battery not detected") },
         "dock": { icon: "apps", name: qsTr("Dock") },
         "showDesktop": { icon: "keyboard_double_arrow_down", name: qsTr("Show Desktop") },
+        "barPosition": { icon: "swap_vert", name: qsTr("Bar position") },
         "power": { icon: "power_settings_new", name: qsTr("Power menu") }
     }
     property bool isGlobalDragging: false

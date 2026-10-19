@@ -542,6 +542,12 @@ Item {
                 }
             }
             DelegateChoice {
+                roleValue: "barPosition"
+                delegate: WrappedLoader {
+                    sourceComponent: BarPosition {}
+                }
+            }
+            DelegateChoice {
                 roleValue: "power"
                 delegate: WrappedLoader {
                     sourceComponent: Power {
