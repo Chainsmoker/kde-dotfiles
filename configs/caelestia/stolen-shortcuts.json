@@ -1,21 +1,11 @@
 [
     {
-        "action": "activate task manager entry 4",
-        "actionFriendlyName": "Activar la entrada 4 del gestor de tareas",
+        "action": "activate task manager entry 3",
+        "actionFriendlyName": "Activar la entrada 3 del gestor de tareas",
         "component": "plasmashell",
         "componentFriendlyName": "plasmashell",
         "keys": [
-            "Meta+4"
-        ]
-    },
-    {
-        "action": "Walk Through Windows (Reverse)",
-        "actionFriendlyName": "Recorrer las ventanas (hacia atrás)",
-        "component": "kwin",
-        "componentFriendlyName": "KWin",
-        "keys": [
-            "Meta+Shift+Tab",
-            "Alt+Shift+Tab"
+            "Meta+3"
         ]
     },
     {
@@ -28,22 +18,41 @@
         ]
     },
     {
+        "action": "Walk Through Windows (Reverse)",
+        "actionFriendlyName": "Recorrer las ventanas (hacia atrás)",
+        "component": "kwin",
+        "componentFriendlyName": "KWin",
+        "keys": [
+            "Alt+Shift+Tab",
+            "Meta+Shift+Tab"
+        ]
+    },
+    {
+        "action": "Grid View",
+        "actionFriendlyName": "Conmutar a la vista de cuadrícula",
+        "component": "kwin",
+        "componentFriendlyName": "KWin",
+        "keys": [
+            "Meta+G"
+        ]
+    },
+    {
+        "action": "Log Out",
+        "actionFriendlyName": "Mostrar pantalla de cierre de sesión",
+        "component": "ksmserver",
+        "componentFriendlyName": "Gestión de la sesión",
+        "keys": [
+            "Ctrl+Alt+Del"
+        ]
+    },
+    {
         "action": "activate application launcher",
         "actionFriendlyName": "Activar el lanzador de aplicaciones",
         "component": "plasmashell",
         "componentFriendlyName": "plasmashell",
         "keys": [
-            "Meta",
-            "Alt+F1"
-        ]
-    },
-    {
-        "action": "activate task manager entry 9",
-        "actionFriendlyName": "Activar la entrada 9 del gestor de tareas",
-        "component": "plasmashell",
-        "componentFriendlyName": "plasmashell",
-        "keys": [
-            "Meta+9"
+            "Alt+F1",
+            "Meta"
         ]
     },
     {
@@ -53,6 +62,81 @@
         "componentFriendlyName": "KWin",
         "keys": [
             "Meta+W"
+        ]
+    },
+    {
+        "action": "activate task manager entry 4",
+        "actionFriendlyName": "Activar la entrada 4 del gestor de tareas",
+        "component": "plasmashell",
+        "componentFriendlyName": "plasmashell",
+        "keys": [
+            "Meta+4"
+        ]
+    },
+    {
+        "action": "Walk Through Windows",
+        "actionFriendlyName": "Recorrer las ventanas",
+        "component": "kwin",
+        "componentFriendlyName": "KWin",
+        "keys": [
+            "Meta+Tab",
+            "Alt+Tab"
+        ]
+    },
+    {
+        "action": "Walk Through Windows",
+        "actionFriendlyName": "Recorrer las ventanas",
+        "component": "kwin",
+        "componentFriendlyName": "KWin",
+        "keys": [
+            "Meta+Tab",
+            "Alt+Tab"
+        ]
+    },
+    {
+        "action": "activate task manager entry 7",
+        "actionFriendlyName": "Activar la entrada 7 del gestor de tareas",
+        "component": "plasmashell",
+        "componentFriendlyName": "plasmashell",
+        "keys": [
+            "Meta+7"
+        ]
+    },
+    {
+        "action": "activate task manager entry 5",
+        "actionFriendlyName": "Activar la entrada 5 del gestor de tareas",
+        "component": "plasmashell",
+        "componentFriendlyName": "plasmashell",
+        "keys": [
+            "Meta+5"
+        ]
+    },
+    {
+        "action": "powerProfile",
+        "actionFriendlyName": "Cambiar perfil de energía",
+        "component": "org_kde_powerdevil",
+        "componentFriendlyName": "Gestión de energía",
+        "keys": [
+            "Meta+B",
+            "Battery"
+        ]
+    },
+    {
+        "action": "activate task manager entry 2",
+        "actionFriendlyName": "Activar la entrada 2 del gestor de tareas",
+        "component": "plasmashell",
+        "componentFriendlyName": "plasmashell",
+        "keys": [
+            "Meta+2"
+        ]
+    },
+    {
+        "action": "view_actual_size",
+        "actionFriendlyName": "Ampliar al tamaño real",
+        "component": "kwin",
+        "componentFriendlyName": "KWin",
+        "keys": [
+            "Meta+0"
         ]
     },
     {
@@ -74,67 +158,12 @@
         ]
     },
     {
-        "action": "activate task manager entry 5",
-        "actionFriendlyName": "Activar la entrada 5 del gestor de tareas",
-        "component": "plasmashell",
-        "componentFriendlyName": "plasmashell",
-        "keys": [
-            "Meta+5"
-        ]
-    },
-    {
         "action": "show-on-mouse-pos",
         "actionFriendlyName": "Mostrar elementos del portapapeles en la posición del ratón",
         "component": "plasmashell",
         "componentFriendlyName": "plasmashell",
         "keys": [
             "Meta+V"
-        ]
-    },
-    {
-        "action": "Walk Through Windows",
-        "actionFriendlyName": "Recorrer las ventanas",
-        "component": "kwin",
-        "componentFriendlyName": "KWin",
-        "keys": [
-            "Meta+Tab",
-            "Alt+Tab"
-        ]
-    },
-    {
-        "action": "Grid View",
-        "actionFriendlyName": "Conmutar a la vista de cuadrícula",
-        "component": "kwin",
-        "componentFriendlyName": "KWin",
-        "keys": [
-            "Meta+G"
-        ]
-    },
-    {
-        "action": "activate task manager entry 7",
-        "actionFriendlyName": "Activar la entrada 7 del gestor de tareas",
-        "component": "plasmashell",
-        "componentFriendlyName": "plasmashell",
-        "keys": [
-            "Meta+7"
-        ]
-    },
-    {
-        "action": "activate task manager entry 2",
-        "actionFriendlyName": "Activar la entrada 2 del gestor de tareas",
-        "component": "plasmashell",
-        "componentFriendlyName": "plasmashell",
-        "keys": [
-            "Meta+2"
-        ]
-    },
-    {
-        "action": "Log Out",
-        "actionFriendlyName": "Mostrar pantalla de cierre de sesión",
-        "component": "ksmserver",
-        "componentFriendlyName": "Gestión de la sesión",
-        "keys": [
-            "Ctrl+Alt+Del"
         ]
     },
     {
@@ -147,31 +176,12 @@
         ]
     },
     {
-        "action": "activate task manager entry 3",
-        "actionFriendlyName": "Activar la entrada 3 del gestor de tareas",
+        "action": "activate task manager entry 9",
+        "actionFriendlyName": "Activar la entrada 9 del gestor de tareas",
         "component": "plasmashell",
         "componentFriendlyName": "plasmashell",
         "keys": [
-            "Meta+3"
-        ]
-    },
-    {
-        "action": "powerProfile",
-        "actionFriendlyName": "Cambiar perfil de energía",
-        "component": "org_kde_powerdevil",
-        "componentFriendlyName": "Gestión de energía",
-        "keys": [
-            "Meta+B",
-            "Battery"
-        ]
-    },
-    {
-        "action": "view_actual_size",
-        "actionFriendlyName": "Ampliar al tamaño real",
-        "component": "kwin",
-        "componentFriendlyName": "KWin",
-        "keys": [
-            "Meta+0"
+            "Meta+9"
         ]
     }
 ]

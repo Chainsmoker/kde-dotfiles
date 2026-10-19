@@ -1,26 +1,30 @@
 {
     "appearance": {
+        "blur": false,
         "transparency": {
             "enabled": false
-        },
-        "blur": false
+        }
     },
     "background": {
         "wallpaperFillMode": 2
+    },
+    "bar": {
+        "dock": {
+            "pinnedApps": [
+                "brave-browser",
+                "foot",
+                "orca-ide"
+            ]
+        },
+        "livePreviews": true
+    },
+    "dashboard": {
+        "hoverThickness": 2
     },
     "overview": {
         "hoverTopLeft": false
     },
     "tabSwitch": {
         "previewOnDesktop": false
-    },
-    "bar": {
-        "livePreviews": false,
-        "dock": {
-            "pinnedApps": [
-                "brave-browser",
-                "foot"
-            ]
-        }
     }
 }
