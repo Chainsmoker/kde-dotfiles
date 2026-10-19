@@ -9,7 +9,6 @@
         "wallpaperFillMode": 2
     },
     "bar": {
-        "position": "top",
         "dock": {
             "pinnedApps": [
                 "brave-browser",
@@ -17,7 +16,128 @@
                 "orca-ide"
             ]
         },
-        "livePreviews": true
+        "entries": [
+            {
+                "enabled": true,
+                "id": "logo",
+                "zone": "left"
+            },
+            {
+                "enabled": true,
+                "id": "workspaces",
+                "zone": "left"
+            },
+            {
+                "enabled": true,
+                "id": "greeter",
+                "zone": "left"
+            },
+            {
+                "enabled": true,
+                "id": "dock",
+                "zone": "middle"
+            },
+            {
+                "enabled": true,
+                "id": "tray",
+                "zone": "right"
+            },
+            {
+                "enabled": true,
+                "id": "updateIndicator",
+                "zone": "right"
+            },
+            {
+                "enabled": false,
+                "id": "github",
+                "zone": "right"
+            },
+            {
+                "enabled": false,
+                "id": "media",
+                "zone": "right"
+            },
+            {
+                "enabled": true,
+                "id": "clock",
+                "zone": "right"
+            },
+            {
+                "enabled": true,
+                "id": "statusIcons",
+                "zone": "right"
+            },
+            {
+                "enabled": false,
+                "id": "kbLayoutIndicator",
+                "zone": "right"
+            },
+            {
+                "enabled": false,
+                "id": "notificationsIndicator",
+                "zone": "right"
+            },
+            {
+                "enabled": false,
+                "id": "perfCpu",
+                "zone": "right"
+            },
+            {
+                "enabled": false,
+                "id": "perfMemory",
+                "zone": "right"
+            },
+            {
+                "enabled": false,
+                "id": "perfStorage",
+                "zone": "right"
+            },
+            {
+                "enabled": false,
+                "id": "perfNetwork",
+                "zone": "right"
+            },
+            {
+                "enabled": false,
+                "id": "perfGpu",
+                "zone": "right"
+            },
+            {
+                "enabled": false,
+                "id": "perfBattery",
+                "zone": "right"
+            },
+            {
+                "enabled": true,
+                "id": "showDesktop",
+                "zone": "right"
+            },
+            {
+                "enabled": true,
+                "id": "barPosition",
+                "zone": "right"
+            },
+            {
+                "enabled": true,
+                "id": "power",
+                "zone": "right"
+            }
+        ],
+        "livePreviews": true,
+        "statusIcons": [
+            { "id": "lockStatus", "enabled": true },
+            { "id": "microphone", "enabled": false },
+            { "id": "kbLayout", "enabled": false },
+            { "id": "network", "enabled": true },
+            { "id": "ethernet", "enabled": true },
+            { "id": "bluetooth", "enabled": true },
+            { "id": "audio", "enabled": true },
+            { "id": "battery", "enabled": false },
+            { "id": "peripheralBattery", "enabled": false },
+            { "id": "nightlight", "enabled": true },
+            { "id": "notifications", "enabled": true }
+        ],
+        "position": "top"
     },
     "dashboard": {
         "hoverThickness": 2
