@@ -9,6 +9,7 @@
         "wallpaperFillMode": 2
     },
     "bar": {
+        "position": "top",
         "dock": {
             "pinnedApps": [
                 "brave-browser",
